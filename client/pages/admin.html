@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Paradise - ניהול</title>
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!--<script src="https://kit.fontawesome.com/8d4d4c3d9d.js" crossorigin="anonymous"></script>-->
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            HOTEL PARADISE <span>| ניהול</span>
+        </div>
+        <nav>
+            <a href="#">דף הבית</a>
+            <a href="#">התנתקות</a>
+        </nav>
+    </header>
+
+    <main class="admin-main">
+
+        <h1 class="page-title">לוח בקרה</h1>
+        <p class="page-subtitle">בחר קטגוריה לניהול</p>
+
+        <div class="dashboard-grid">
+
+            <div class="dashboard-card" id="roomTypesCard" onclick="showRoomTypesSection()">
+                <i class="fa-solid fa-bed"></i>
+                <h2>סוגי חדרים</h2>
+                <p>ניהול קטגוריות וסוגי חדרים במלון</p>
+            </div>
+
+            <div class="dashboard-card" id="roomsCard" onclick="showRoomsSection()">
+                <i class="fa-solid fa-door-open"></i>
+                <h2>חדרים</h2>
+                <p>ניהול החדרים בפועל, זמינות ומחירים</p>
+            </div>
+
+        </div>
+
+        <!-- ============ SECTION: ROOM TYPES ============ -->
+        <section id="roomTypesSection" class="admin-section hidden">
+
+            <div class="section-header">
+                <h2>סוגי חדרים</h2>
+                <button class="btn-primary" onclick="openAddRoomTypeModal()">
+                    <i class="fa-solid fa-plus"></i> הוסף סוג חדר
+                </button>
+            </div>
+
+            <table class="admin-table" id="roomTypesTable">
+                <thead>
+                    <tr>
+                        <th>שם</th>
+                        <th>מקסימום אורחים</th>
+                        <th>מחיר בסיס</th>
+                        <th>תיאור</th>
+                        <th>פעולות</th>
+                    </tr>
+                </thead>
+                <tbody id="roomTypesTableBody">
+            </tbody>
+            </table>
+
+        </section>
+
+        <!-- ============ SECTION: ROOMS ============ -->
+        <section id="roomsSection" class="admin-section hidden">
+
+            <div class="section-header">
+                <h2>חדרים</h2>
+                <button class="btn-primary" onclick="openAddRoomModal()">
+                    <i class="fa-solid fa-plus"></i> הוסף חדר
+                </button>
+            </div>
+
+            <table class="admin-table" id="roomsTable">
+                <thead>
+                    <tr>
+                        <th>סוג חדר</th>
+                        <th>מספר חדר</th>
+                        <th>קומה</th>
+                        <th>סטטוס</th>
+                        <th>פעולות</th>
+                    </tr>
+                </thead>
+                <tbody id="roomsTableBody">
+                </tbody>
+            </table>
+
+        </section>
+
+    </main>
+
+    <!-- ============ MODAL: ADD / EDIT ROOM TYPE ============ -->
+    <div class="modal-overlay hidden" id="roomTypeModal">
+        <div class="modal-box">
+            <h3 id="roomTypeModalTitle">הוספת סוג חדר</h3>
+            <form id="roomTypeForm">
+                <div class="input-box">
+                    <label>שם</label>
+                    <input type="text" id="roomTypeName">
+                </div>
+                <div class="input-box">
+                    <label>מקסימום אורחים</label>
+                    <input type="number" id="roomTypeMaxGuests">
+                </div>
+                <div class="input-box">
+                    <label>מחיר בסיס</label>
+                    <input type="number" id="roomTypeBasePrice">
+                </div>
+                <div class="input-box">
+                    <label>תיאור</label>
+                    <input type="text" id="roomTypeDescription">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="closeRoomTypeModal()">ביטול</button>
+                    <button type="submit" class="btn-primary" onclick="saveRoomType(event)">שמירה</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============ MODAL: ADD / EDIT ROOM ============ -->
+    <div class="modal-overlay hidden" id="roomModal">
+        <div class="modal-box">
+            <h3 id="roomModalTitle">הוספת חדר</h3>
+            <form id="roomForm">
+                <div class="input-box">
+                    <label>מספר חדר</label>
+                    <input type="number" id="roomNumber">
+                </div>
+                <div class="input-box">
+                    <label>סוג חדר</label>
+                    <select id="roomTypeSelect">
+                            <!-- <option value="לא נבחר סוג חדר"></option> -->
+                    </select>
+                </div>
+                <div class="input-box">
+                    <label>קומה</label>
+                    <input type="number" id="roomFloor">
+                </div>
+                <div class="input-box">
+                    <label>תפוס?</label>
+                    <select id="roomIsActive">
+                        <option value="true">כן</option>
+                        <option value="false">לא</option>
+                    </select>
+                </div>
+                <div class="input-box">
+                    <label>תמונות החדר</label>
+                    <input type="file" id="roomImages" accept="image/*" multiple>
+                </div>
+
+                <!-- תצוגה מקדימה של התמונות שנבחרו -->
+                <div class="image-preview-container" id="imagePreviewContainer"></div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="closeRoomModal()">ביטול</button>
+                    <button type="submit" class="btn-primary" onclick="saveRoom(event)">שמירה</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/admin.js"></script>
+</body>
+
+</html>

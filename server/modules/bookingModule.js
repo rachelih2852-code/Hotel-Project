@@ -18,7 +18,7 @@ const bookingSchema = new mongoose.Schema(
             type: Number
         },
         total_price: {
-            type: floa
+            type: Number
         },
         status: {
             type: String

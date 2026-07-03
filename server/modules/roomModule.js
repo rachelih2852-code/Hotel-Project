@@ -11,9 +11,6 @@ const roomSchema = new mongoose.Schema(
         floor: {
             type: Number
         },
-        room_number: {
-            type: Number
-        },
         is_active: {
             type: Boolean
         }

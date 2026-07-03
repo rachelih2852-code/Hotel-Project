@@ -1,12 +1,13 @@
 const mongoose = require('mongoose')
-const Room_Typescema = new mongoose.Schema(
+
+const roomTypescema = new mongoose.Schema(
     {
         
         sort:{
-            type: string
+            type: String
             
         },
-        maxguests:{
+        max_guests:{
              type: Number
 
         },
@@ -14,9 +15,9 @@ const Room_Typescema = new mongoose.Schema(
              type: Number
 
         },
-        descriotion:
+        description:
         {
-            type: string
+            type: String
 
         },
 
@@ -26,5 +27,5 @@ const Room_Typescema = new mongoose.Schema(
 
 
 )
-const Room_Typescema = mongoose.model('Room_Type' ,Room_TypeScema )
-module.exports = Room_Typescema
+const RoomTypescema = mongoose.model('RoomType' ,roomTypescema )
+module.exports = RoomTypescema
