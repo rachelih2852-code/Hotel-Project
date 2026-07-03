@@ -1,6 +1,7 @@
 const Booking = require('../modules/bookingModule')
 //comment for git
 //another comment
+//45678
 const createBooking = async (req, res) => {
     try {
         const { customer_id, room_id, check_in_date, check_out_date, num_guests, total_price, status } = req.body;
